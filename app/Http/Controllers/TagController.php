@@ -59,6 +59,6 @@ class TagController extends Controller
     {
         $tag->delete();
  
-         return redirect()->route('goals.index'); 
+        return redirect()->route('goals.index'); 
     }
 }
