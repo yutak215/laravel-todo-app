@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GoalController;
+use App\Http\Controllers\TodoController;
+use App\Http\Controllers\TagController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +22,10 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::resource('goals', GoalController::class)->only(['index', 'store', 'update', 'destroy'])->middleware('auth');
+
+// ↓のルーティングは、ネスト
+// goals/{そのゴールのid}/todos/{そのtodoのid} という風に自動的にルーティング
+// {}の部分のidは、route()の第二引数で渡されてくる
+Route::resource('goals.todos', TodoController::class)->only(['store', 'update', 'destroy'])->middleware('auth');
+
+Route::resource('tags', TagController::class)->only(['store', 'update', 'destroy'])->middleware('auth');

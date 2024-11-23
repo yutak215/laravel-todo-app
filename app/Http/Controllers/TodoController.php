@@ -47,6 +47,8 @@ class TodoController extends Controller
         $todo->content = $request->input('content');
         $todo->user_id = Auth::id();
         $todo->goal_id = $goal->id;
+        // input()メソッドやboolean()メソッドでは、第2引数を渡すことで第1引数に指定したフォームの入力値が存在しない場合の初期値を設定できる
+        // つまりユーザーが完了かどうかを編集しなくても、以前の値を代入する
         $todo->done = $request->boolean('done', $todo->done);
         $todo->save();
 
